@@ -27,7 +27,7 @@
 
 		<div id="user_nav" style="color:whitesmoke;">
 			<% if user_signed_in? %>
-				Signed in as <%= current_user.email %>. Not you? <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+				<%= "#{current_user.email} (#{current_user.role})" %>. Not you? <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
 			<% else %>
 				<%= link_to "Sign In", new_user_session_path %>
 				<!-- 
