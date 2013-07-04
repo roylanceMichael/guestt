@@ -2,97 +2,70 @@
 <html>
 <head>
 	<title>Guest Blogging Network - Guestt Marketplaceb s</title>
-	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= stylesheet_link_tag "application", :media => "all" %>
+	<!-- Le styles -->
+    <link href="/assets/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="/assets/bootstrap-responsive.css" rel="stylesheet">
 	<%= javascript_include_tag "application" %>
+	<script src="/assets/bootstrap.js" ></script>
 	<%= csrf_meta_tags %>
-
-	 <!-- Le styles -->
-	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
-	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-responsive.min.css" rel="stylesheet">
-
-	<!-- Fav and touch icons -->
-    <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-	<div class="container title offset1" id="logo">
-		<div class="span6" style="float: left;">
-			<a href="/" class="logo" title="guestt">
-			guestt       </a>
-		</div>
 
-		<div id="user_nav" style="color:whitesmoke;">
-			<% if user_signed_in? %>
-				<%= "#{current_user.email} (#{current_user.role})" %>. Not you? <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-			<% else %>
-				<%= link_to "Sign In", new_user_session_path %>
-				<!-- 
-					<form class="span form-inline offset1" style="
-																margin-top: 20px;
-																color: #fff;
-																margin-right: 20px;">
-						<input type="text" class="input-small" placeholder="Email">
-						<input type="password" class="input-small" placeholder="Password">
-						<button type="submit" class="btn">Sign in</button>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">guestt</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+            <div class="navbar pull-right">
+            	<% if user_signed_in? %>
+					<%= "#{current_user.email} (#{current_user.role})" %>. Not you? <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+				<% else %>
+					<%= link_to "Sign In", new_user_session_path %>
+				<% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-						<br>
-
-						<label class="checkbox" style="font-size: 12px;">
-							<input type="checkbox"> Remember me
-						</label>
-					</form>
-				-->
-			<% end %>
-		</div>
-	</div>
-
-	
-	<div class="hero-unit header">
-		<div class="row" id="row">
-			<div class="span6">
-				<h2>The #1 Guest Blog Posting Marketplace on the Web</h2>
-				<h3>The place where blog owners and guest posters meet to distribute top quality content throughout the biggest network of bloggers on the web</h3>
-			</div>
-			<!--
-			<div id="signupform" class="span3">
-				<h2 align="left" id="headline-form">Sign Up For Free</h2>
-
-				<form action="https://madmimi.com/signups/subscribe/72061" method="post" id="mad_mimi_signup_form" target="_blank">
-
-					<div class="row-fluid"><input type="text" id="signup_first_name" placeholder="First Name..." name="signup[first_name]" class="span6" style="float: left;" required>
-
-					<input id="signup_last_name" type="text" placeholder="Last Name..." name="signup[last_name]" class="span6" style="float: right;" required></div>
-					<input id="signup_email" type="email" placeholder="Your Email..." name="signup[email]" class="span3" required>
-
-					<select id="signup_user" name="signup[user]" class="span3">
-						<option>Blog Owner</option>
-						<option>Guest Poster</option>
-						<option>Both: Guest Poster & Blog Owner</option>
-					</select>
-
-					<label style="font-size: 12px;"><input type="checkbox" name="terms" required> I agree with the <a href="/terms.html" style="color:#00223d;">Terms and Conditions</a>.</label>
-					<input id="webform_submit_button" type="submit" value="Sign Up Now!" class="btn btn-primary btn-block">
-					<div class="clearfix"></div>
-
-				</form>
-			</div>
-			-->
-		</div>
-	</div>
-	<br />
-	<br />
-
-	<div class="container">
-		<%= yield %>
-		<br />
-		<footer>
-			<p class="muted">© Guestt 2012    <a href="/terms.html" class="muted"><small>Terms & Conditions</small></a></p>
-		</footer>
-	</div> 
+    <div class="container">
+      <%= yield %>
+      <hr>
+      <footer>
+		<p class="muted">© Guestt 2012    <a href="/terms.html" class="muted"><small>Terms & Conditions</small></a></p>
+	  </footer>
+    </div> <!-- /container -->
 	
 </body>
 </html>
