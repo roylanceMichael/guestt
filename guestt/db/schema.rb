@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130622173807) do
+ActiveRecord::Schema.define(:version => 20130720194557) do
+
+  create_table "blogs", :force => true do |t|
+    t.string "name",        :default => "", :null => false
+    t.string "description", :default => ""
+    t.string "url",         :default => "", :null => false
+    t.string "user_email",  :default => "", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

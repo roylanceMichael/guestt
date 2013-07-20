@@ -27,6 +27,7 @@
             <ul class="nav">
               <li class="<%= homeclass %>"><%= link_to "guestt", root_path %></li>
               
+              <!-- guest menu item-->
               <li class="<%= guestclass %> dropdown">
                 <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">guest <b class="caret"></b></a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
@@ -35,7 +36,8 @@
                   </li>
                 </ul>
               </li>
-              
+
+              <!-- blog owner menu item-->
               <li class="<%= blogownerclass %> dropdown">
                 <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">blog owner <b class="caret"></b></a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
@@ -46,12 +48,13 @@
               </li>
             </ul>
             
+            <!-- user sign in location -->
             <div class="navbar pull-right">
             	<% if user_signed_in? %>
 					       <span class="brand">
-					       <%= "#{current_user.email} (#{current_user.role})" %>, not you?
-						     <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-					     </span>
+					         <%= "#{current_user.email} (#{current_user.role})" %>, not you?
+						       <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+					       </span>
       				<% else %>
       					<%= link_to "Sign In", new_user_session_path, :class => "brand" %>
       				<% end %>
