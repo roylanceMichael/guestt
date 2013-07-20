@@ -56,7 +56,9 @@
 						       <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
 					       </span>
       				<% else %>
-      					<%= link_to "Sign In", new_user_session_path, :class => "brand" %>
+                <span>
+      					 <%= link_to "Sign In", new_user_session_path %>
+                </span>
       				<% end %>
             </div>
           </div>
