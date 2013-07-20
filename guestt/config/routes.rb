@@ -2,7 +2,15 @@ Guestt::Application.routes.draw do
   devise_for :users
 
   match "/guest/", :controller => "guest", :action => "index", via: [:get]
+  
+  #blogs
   match "/blogowner/", :controller => "blogowner", :action => "index", via: [:get]
+  match "/blogowner/new", :controller => "blogowner", :action => "newblog", via: [:get]
+  match "/blogowner/approved", :controller => "blogowner", :action => "approvedblogs", via: [:get]
+  match "/blogowner/rejected", :controller => "blogowner", :action => "rejectedblogs", via: [:get]
+  match "/blogowner/pending", :controller => "blogowner", :action => "pendingblogs", via: [:get]
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
  

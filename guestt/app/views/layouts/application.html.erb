@@ -51,8 +51,8 @@
             <!-- user sign in location -->
             <div class="navbar pull-right">
             	<% if user_signed_in? %>
-					       <span class="brand">
-					         <%= "#{current_user.email} (#{current_user.role})" %>, not you?
+					       <span>
+					         <span style="color: gray"><%= "#{current_user.email} (#{current_user.role})" %>, not you?</span>
 						       <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
 					       </span>
       				<% else %>
@@ -68,7 +68,7 @@
       <%= yield %>
       <hr>
       <footer>
-		<p class="muted">© Guestt 2012    <a href="/terms.html" class="muted"><small>Terms & Conditions</small></a></p>
+		<p class="muted">© guestt 2013    <a href="/terms.html" class="muted"><small>Terms & Conditions</small></a></p>
 	  </footer>
     </div> <!-- /container -->
 	

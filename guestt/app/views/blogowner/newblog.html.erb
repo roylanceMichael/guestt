@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="span2 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+          <li class="active"><a href="<%= blogowner_new_path %>"><i class="icon-chevron-right"></i> new blog</a></li>
+          <li><a href="<%= blogowner_approved_path %>"><i class="icon-chevron-right"></i> approved blogs</a></li>
+          <li><a href="<%= blogowner_pending_path %>"><i class="icon-chevron-right"></i> pending blogs</a></li>
+          <li><a href="<%= blogowner_rejected_path %>"><i class="icon-chevron-right"></i> rejected blogs</a></li>
+        </ul>
+  	</div>
+
+  	<div class="span10">
+		<form class="form-horizontal">
+			<fieldset>
+				<legend>new blog</legend>
+				
+				<div class="control-group">
+					<label class="control-label">blog name</label>
+					<div class="controls">
+						<input type="text" required="required" placeholder="please enter the blog's name" >
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">blog description</label>
+					<div class="controls">
+						<input type="text" required="required" placeholder="please enter a description about the blog" >
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">blog url</label>
+					<div class="controls">
+						<input type="text" required="required" placeholder="please enter the blog's url" >
+					</div>
+				</div>
+
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn">submit</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
