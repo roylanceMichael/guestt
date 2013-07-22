@@ -9,6 +9,6 @@ class AddBlogModel < ActiveRecord::Migration
   end
 
   def down
-  	#drop_table :blogs
+  	drop_table :blogs
   end
 end
