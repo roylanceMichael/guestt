@@ -9,28 +9,28 @@
   	</div>
 
   	<div class="span10">
-		<form class="form-horizontal">
+  		<%= form_tag blogowner_create_path, :method => :post, :class => "form-horizontal" do %>
 			<fieldset>
 				<legend>new blog</legend>
 				
 				<div class="control-group">
 					<label class="control-label">blog name</label>
 					<div class="controls">
-						<input type="text" required="required" placeholder="please enter the blog's name" >
+						<input type="text" required="required" name="name" placeholder="please enter the blog's name" >
 					</div>
 				</div>
 
 				<div class="control-group">
 					<label class="control-label">blog description</label>
 					<div class="controls">
-						<input type="text" required="required" placeholder="please enter a description about the blog" >
+						<input type="text" required="required" name="description" placeholder="please enter a description" >
 					</div>
 				</div>
 
 				<div class="control-group">
 					<label class="control-label">blog url</label>
 					<div class="controls">
-						<input type="text" required="required" placeholder="please enter the blog's url" >
+						<input type="text" required="required" name="url" placeholder="please enter the blog's url" >
 					</div>
 				</div>
 
@@ -40,6 +40,6 @@
 					</div>
 				</div>
 			</fieldset>
-		</form>
+		<% end %>
 	</div>
 </div>

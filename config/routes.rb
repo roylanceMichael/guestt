@@ -6,6 +6,7 @@ Guestt::Application.routes.draw do
   #blogs
   match "/blogowner/", :controller => "blogowner", :action => "index", via: [:get]
   match "/blogowner/new", :controller => "blogowner", :action => "newblog", via: [:get]
+  match "/blogowner/create", :controller => "blogowner", :action => "createblog", via: [:post]
   match "/blogowner/approved", :controller => "blogowner", :action => "approvedblogs", via: [:get]
   match "/blogowner/rejected", :controller => "blogowner", :action => "rejectedblogs", via: [:get]
   match "/blogowner/pending", :controller => "blogowner", :action => "pendingblogs", via: [:get]
