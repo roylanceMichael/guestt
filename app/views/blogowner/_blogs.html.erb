@@ -3,6 +3,6 @@
 		<h2><%= blog_status.blog.name %></h2>
 		<h4><%= blog_status.blog.description %></h4>
 		<a href="<%= blog_status.blog.url %>"><%= blog_status.blog.url %></a>
-		<p><%= blog_status.date %></p>
+		<p><%= formatDate(blog_status.date) %></p>
 	</div>
 <% end %>

@@ -6,6 +6,35 @@ class BlogownerController < ApplicationController
 				) b
 				on blog_statuses.blog_id = b.blog_id and blog_statuses.date = b.date}
 
+	def createstatus(blog_id, status)
+		newStatus = BlogStatus.new
+		newStatus.blog_id = blog_id
+		newStatus.status = status
+		newStatus.date = Time.now
+		newStatus.save
+	end
+
+	def manageblogs
+		#serves up the html page
+	end
+
+	def updateblogstatus
+		blog_id = params[:blog_id]
+		status = params[:status]
+
+		if blog_id == nil || Blog.find(blog_id) == nil || !BlogStatus.acceptablestatus(status)
+			raise "invalid parameters"
+		end
+
+		createstatus(blog_id, status)
+
+		render :json => { :success => "true" }
+	end
+
+	def blogs
+		render :json => BlogStatus.joins(@@joinString).to_json(:include => [:blog])
+	end
+
 	def index
 		redirect_to blogowner_approved_path
 	end
@@ -14,10 +43,6 @@ class BlogownerController < ApplicationController
 	end
 
 	def createblog
-		if !user_signed_in? 
-			return
-		end
-
 		newBlog = Blog.new
 		newBlog.name = params[:name]
 		newBlog.description = params[:description]
@@ -25,11 +50,7 @@ class BlogownerController < ApplicationController
 		newBlog.user_email = current_user.email
 		newBlog.save
 
-		newStatus = BlogStatus.new
-		newStatus.blog_id = newBlog.id
-		newStatus.status = BlogStatus.pending
-		newStatus.date = Time.now
-		newStatus.save
+		createstatus(newBlog.id, BlogStatus.pending)
 
 		redirect_to blogowner_pending_path
 	end

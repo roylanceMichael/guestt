@@ -1,4 +1,8 @@
 module ApplicationHelper
+	def formatDate(d)
+		Date.parse(d.to_s).to_s(:db)
+	end
+
 	def homeclass
 		if(request.env['PATH_INFO'] == "/")
 			"active"

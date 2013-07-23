@@ -1,0 +1,85 @@
+<div class="alert" data-bind="visible: alertVisible, text: alertText">
+  <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+</div>
+
+<div class="row">
+	<div class="span2 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+          <% if current_user.isAdmin %>
+          	<li class="active"><a href="<%= blogowner_manage_path %>"><i class="icon-chevron-right"></i>manage blogs</a></li>
+          <% end %>
+          <li><a href="<%= blogowner_new_path %>"><i class="icon-chevron-right"></i> new blog</a></li>
+          <li><a href="<%= blogowner_approved_path %>"><i class="icon-chevron-right"></i> approved blogs</a></li>
+          <li><a href="<%= blogowner_pending_path %>"><i class="icon-chevron-right"></i> pending blogs</a></li>
+          <li><a href="<%= blogowner_rejected_path %>"><i class="icon-chevron-right"></i> rejected blogs</a></li>
+        </ul>
+  	</div>
+
+  	<div class="span10" data-bind="foreach: blogs">
+  		<div class="span4">
+			<h2 data-bind="text: blog.name"></h2>
+			<h4 data-bind="text: blog.description"></h4>
+			<a data-bind="href: blog.url, text: blog.url"></a>
+			<p data-bind="text: $parent.formatDate(date)"></p>
+			<select data-bind="options: $parent.statuses, value: status, event: {change: $parent.statusChanged } "></select>
+  		</div>
+	</div>
+</div>
+
+<script>
+	var addLogic = function(d){
+		var tmpVar = d;
+		var rtnStr = tmpVar;
+
+		if(tmpVar < 10) {
+			rtnStr = "0" + tmpVar;
+		}
+		return rtnStr;
+	}
+
+	$(document).ready(function(){
+		var viewModel = {
+			alertVisible: ko.observable(false),
+			alertText: ko.observable(),
+			blogs: ko.observableArray(),
+			// hard code later?
+			statuses: [ "<%= BlogStatus.approved %>", "<%= BlogStatus.pending %>", "<%= BlogStatus.rejected %>" ],
+			// move out to its own function later on...
+			formatDate: function(d){
+				var tmpDate = new Date(d);
+				return tmpDate.getFullYear() + "-" + addLogic(tmpDate.getMonth() + 1) + "-" + addLogic(tmpDate.getUTCDate());
+			},
+			statusChanged: null
+		};
+
+		var sc = function(data, event){
+			$.ajax({
+				url: "<%= blogowner_updatestatus_path %>",
+				data: { "blog_id" : data.blog_id, "status": data.status },
+				type: "PUT",
+				success: function(response){
+					viewModel.alertText("Added new status of " + data.status + " to " + data.blog.name);
+					viewModel.alertVisible(true);
+				},
+				error: function(a, b, errorMessage) {
+					viewModel.alertText(errorMessage);
+					viewModel.alertVisible(true);
+				}
+			});
+		};
+
+		// I don't like setting up the function this way, but other ways were giving me problems
+		viewModel.statusChanged = sc;
+
+		$.ajax({
+			url: "<%= blogowner_blogs_path %>",
+			success: function(data){
+				for(var i = 0; i < data.length; i++){
+					viewModel.blogs.push(data[i]);
+				}
+			}
+		});
+
+		ko.applyBindings(viewModel);
+	});
+</script>

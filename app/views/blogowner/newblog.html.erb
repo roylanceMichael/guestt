@@ -2,7 +2,7 @@
 	<div class="span2 bs-docs-sidebar">
         <ul class="nav nav-list bs-docs-sidenav">
           <% if current_user.isAdmin %>
-          	<li><a href="#"><i class="icon-chevron-right"></i>manage blogs</a></li>
+          	<li><a href="<%= blogowner_manage_path %>"><i class="icon-chevron-right"></i>manage blogs</a></li>
           <% end %>
           <li class="active"><a href="<%= blogowner_new_path %>"><i class="icon-chevron-right"></i> new blog</a></li>
           <li><a href="<%= blogowner_approved_path %>"><i class="icon-chevron-right"></i> approved blogs</a></li>
