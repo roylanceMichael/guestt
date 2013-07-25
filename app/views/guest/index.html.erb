@@ -1,0 +1,58 @@
+<div class="row">
+	<div class="span2 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+          <li class="active"><a href="#"><i class="icon-chevron-right"></i> search</a></li>
+        </ul>
+  </div>
+
+  <!-- search stuff -->
+  <div class="span10" >
+    <form class="form-horizontal">
+      <div class="control-group">
+        <label class="control-label" style="margin-right: 10px">search</label>
+        <input type="text" name="name" placeholder="search for a blog" data-bind="value: searchString, valueUpdate: 'afterkeydown'" >
+      </div>
+    </form>
+  </div>
+
+  <div class="span10" data-bind="foreach: searchedBlogs">
+    <div class="span4">
+      <h2 data-bind="text: blog.name"></h2>
+      <h4 data-bind="text: blog.description"></h4>
+      <a data-bind="href: blog.url, text: blog.url"></a>
+      <p data-bind="text: formatDate(date)"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+
+    var viewModel = {
+      searchString: ko.observable(),
+      searchedBlogs: ko.observableArray()
+    };
+
+    var searchBlogs = function(searchData){
+      $.ajax({
+        url: "<%= blog_searchblogs_path %>",
+        data: searchData, 
+        success: function(data){
+          viewModel.searchedBlogs.removeAll();
+
+          for(var i = 0; i < data.length; i++){
+            viewModel.searchedBlogs.push(data[i]);
+          }
+        }
+      });
+    }
+
+    viewModel.searchString.subscribe(function(event){
+      searchBlogs({ searchTerms: viewModel.searchString });
+    });
+    
+    searchBlogs(null);
+
+    ko.applyBindings(viewModel);
+  });
+</script>

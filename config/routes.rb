@@ -13,6 +13,7 @@ Guestt::Application.routes.draw do
   match "/blogowner/manage", :controller => "blogowner", :action => "manageblogs", via: [:get]
   match "/blogowner/updatestatus", :controller => "blogowner", :action => "updateblogstatus", via: [:put]
   match "/blogowner/blogs", :controller => "blogowner", :action => "blogs", via: [:get]
+  match "/blog/searchblogs", :controller => "blog", :action => "searchblogs", via: [:get]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

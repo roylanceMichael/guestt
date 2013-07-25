@@ -13,3 +13,18 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+formatDate = function(d){
+				var tmpDate = new Date(d);
+				return tmpDate.getFullYear() + "-" + addLogicForDate(tmpDate.getMonth() + 1) + "-" + addLogicForDate(tmpDate.getUTCDate());
+			};
+			
+addLogicForDate = function(d){
+		var tmpVar = d;
+		var rtnStr = tmpVar;
+
+		if(tmpVar < 10) {
+			rtnStr = "0" + tmpVar;
+		}
+		return rtnStr;
+	};

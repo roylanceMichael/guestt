@@ -1,11 +1,4 @@
 class BlogownerController < ApplicationController
-	@@joinString = %{join (
-					select blog_id as blog_id, max(date) as date
-						from guestt.blog_statuses
-					group by blog_id		
-				) b
-				on blog_statuses.blog_id = b.blog_id and blog_statuses.date = b.date}
-
 	def createstatus(blog_id, status)
 		newStatus = BlogStatus.new
 		newStatus.blog_id = blog_id
@@ -32,7 +25,7 @@ class BlogownerController < ApplicationController
 	end
 
 	def blogs
-		render :json => BlogStatus.joins(@@joinString).to_json(:include => [:blog])
+		render :json => BlogStatus.joins(@@latestBlogStatusJoin).to_json(:include => [:blog])
 	end
 
 	def index
@@ -56,14 +49,14 @@ class BlogownerController < ApplicationController
 	end
 
 	def approvedblogs
-		@blog_statuses = BlogStatus.joins(@@joinString).where("blog_statuses.status = '#{BlogStatus.approved}'")
+		@blog_statuses = BlogStatus.joins(@@latestBlogStatusJoin).where("blog_statuses.status = '#{BlogStatus.approved}'")
 	end
 
 	def pendingblogs
-		@blog_statuses = BlogStatus.joins(@@joinString).where("blog_statuses.status = '#{BlogStatus.pending}'")
+		@blog_statuses = BlogStatus.joins(@@latestBlogStatusJoin).where("blog_statuses.status = '#{BlogStatus.pending}'")
 	end
 
 	def rejectedblogs
-		@blog_statuses = BlogStatus.joins(@@joinString).where("blog_statuses.status = '#{BlogStatus.rejected}'")
+		@blog_statuses = BlogStatus.joins(@@latestBlogStatusJoin).where("blog_statuses.status = '#{BlogStatus.rejected}'")
 	end
 end

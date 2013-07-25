@@ -3,6 +3,22 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_login
 
+  @@latestBlogStatusJoin = %{join (
+        select blog_id as blog_id, max(date) as date
+          from guestt.blog_statuses
+        group by blog_id    
+      ) b
+      on blog_statuses.blog_id = b.blog_id and blog_statuses.date = b.date}
+
+  @@latestBlogStatusJoinWithBlog = %{join (
+        select blog_id as blog_id, max(date) as date
+          from guestt.blog_statuses
+        group by blog_id    
+      ) b
+      on blog_statuses.blog_id = b.blog_id and blog_statuses.date = b.date
+      join blogs c
+        on blog_statuses.blog_id = c.id}
+
   # From http://guides.rubyonrails.org/action_controller_overview.html
   # and http://stackoverflow.com/questions/6209663/how-to-skip-a-before-filter-for-devises-sessionscontroller
   def require_login

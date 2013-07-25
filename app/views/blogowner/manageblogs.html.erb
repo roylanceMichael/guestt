@@ -20,23 +20,13 @@
 			<h2 data-bind="text: blog.name"></h2>
 			<h4 data-bind="text: blog.description"></h4>
 			<a data-bind="href: blog.url, text: blog.url"></a>
-			<p data-bind="text: $parent.formatDate(date)"></p>
+			<p data-bind="text: formatDate(date)"></p>
 			<select data-bind="options: $parent.statuses, value: status, event: {change: $parent.statusChanged } "></select>
   		</div>
 	</div>
 </div>
 
 <script>
-	var addLogic = function(d){
-		var tmpVar = d;
-		var rtnStr = tmpVar;
-
-		if(tmpVar < 10) {
-			rtnStr = "0" + tmpVar;
-		}
-		return rtnStr;
-	}
-
 	$(document).ready(function(){
 		var viewModel = {
 			alertVisible: ko.observable(false),
@@ -45,10 +35,6 @@
 			// hard code later?
 			statuses: [ "<%= BlogStatus.approved %>", "<%= BlogStatus.pending %>", "<%= BlogStatus.rejected %>" ],
 			// move out to its own function later on...
-			formatDate: function(d){
-				var tmpDate = new Date(d);
-				return tmpDate.getFullYear() + "-" + addLogic(tmpDate.getMonth() + 1) + "-" + addLogic(tmpDate.getUTCDate());
-			},
 			statusChanged: null
 		};
 
