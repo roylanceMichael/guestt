@@ -1,12 +1,4 @@
 class BlogownerController < ApplicationController
-	def createstatus(blog_id, status)
-		newStatus = BlogStatus.new
-		newStatus.blog_id = blog_id
-		newStatus.status = status
-		newStatus.date = Time.now
-		newStatus.save
-	end
-
 	def manageblogs
 		#serves up the html page
 	end
@@ -19,7 +11,7 @@ class BlogownerController < ApplicationController
 			raise "invalid parameters"
 		end
 
-		createstatus(blog_id, status)
+		createstatus(blog_id, status, nil)
 
 		render :json => { :success => "true" }
 	end
@@ -43,7 +35,7 @@ class BlogownerController < ApplicationController
 		newBlog.user_email = current_user.email
 		newBlog.save
 
-		createstatus(newBlog.id, BlogStatus.pending)
+		createstatus(newBlog.id, BlogStatus.pending, nil)
 
 		redirect_to blogowner_pending_path
 	end

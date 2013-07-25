@@ -11,12 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130722172845) do
+ActiveRecord::Schema.define(:version => 20130725194155) do
 
   create_table "blog_statuses", :force => true do |t|
-    t.integer  "blog_id",                        :null => false
-    t.string   "status",  :default => "pending", :null => false
-    t.datetime "date",                           :null => false
+    t.integer  "blog_id",                            :null => false
+    t.string   "status",      :default => "pending", :null => false
+    t.datetime "date",                               :null => false
+    t.string   "guest"
+    t.string   "guest_email"
   end
 
   create_table "blogs", :force => true do |t|

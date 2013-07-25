@@ -19,6 +19,16 @@ class ApplicationController < ActionController::Base
       join blogs c
         on blog_statuses.blog_id = c.id}
 
+  # creates the status
+  def createstatus(blog_id, status, guest_email)
+    newStatus = BlogStatus.new
+    newStatus.blog_id = blog_id
+    newStatus.status = status
+    newStatus.date = Time.now
+    newStatus.guest_email = guest_email
+    newStatus.save
+  end
+
   # From http://guides.rubyonrails.org/action_controller_overview.html
   # and http://stackoverflow.com/questions/6209663/how-to-skip-a-before-filter-for-devises-sessionscontroller
   def require_login

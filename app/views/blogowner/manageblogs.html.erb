@@ -20,7 +20,12 @@
 			<h2 data-bind="text: blog.name"></h2>
 			<h4 data-bind="text: blog.description"></h4>
 			<a data-bind="href: blog.url, text: blog.url"></a>
-			<p data-bind="text: formatDate(date)"></p>
+			<div data-bind="text: formatDate(date)">
+			</div>
+			<div data-bind="text: blog.user_email">
+			</div>
+			<div data-bind="text: guest_email">
+			</div>
 			<select data-bind="options: $parent.statuses, value: status, event: {change: $parent.statusChanged } "></select>
   		</div>
 	</div>
@@ -33,7 +38,7 @@
 			alertText: ko.observable(),
 			blogs: ko.observableArray(),
 			// hard code later?
-			statuses: [ "<%= BlogStatus.approved %>", "<%= BlogStatus.pending %>", "<%= BlogStatus.rejected %>" ],
+			statuses: [ "<%= BlogStatus.approved %>", "<%= BlogStatus.pending %>", "<%= BlogStatus.rejected %>", "<%= BlogStatus.sold %>" ],
 			// move out to its own function later on...
 			statusChanged: null
 		};

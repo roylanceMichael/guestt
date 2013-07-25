@@ -1,7 +1,8 @@
 <div class="row">
 	<div class="span2 bs-docs-sidebar">
         <ul class="nav nav-list bs-docs-sidenav">
-          <li class="active"><a href="#"><i class="icon-chevron-right"></i> search</a></li>
+          <li class="active"><a href="<%= guest_path %>"><i class="icon-chevron-right"></i> search</a></li>
+          <li><a href="<%= guest_sold_path %>"><i class="icon-chevron-right"></i> purchased blogs</a></li>
         </ul>
   </div>
 
@@ -21,6 +22,7 @@
       <h4 data-bind="text: blog.description"></h4>
       <a data-bind="href: blog.url, text: blog.url"></a>
       <p data-bind="text: formatDate(date)"></p>
+      <a data-bind="click: $parent.purchaseSpot" href="#">purchase</a>
     </div>
   </div>
 </div>
@@ -30,12 +32,23 @@
 
     var viewModel = {
       searchString: ko.observable(),
-      searchedBlogs: ko.observableArray()
+      searchedBlogs: ko.observableArray(),
+      purchaseSpot: function(data, event){
+        alert("the guest goes through the process of purchasing the blog (confirm dialog, paypal screen, confirmation from paypal)");
+
+        var soldData = { blog_id: data.blog_id };
+        $.ajax({
+          url: "<%= guest_updatestatus_path %>",
+          type: "PUT",
+          data: soldData, 
+          success: searchBlogs
+        });
+      }
     };
 
     var searchBlogs = function(searchData){
       $.ajax({
-        url: "<%= blog_searchblogs_path %>",
+        url: "<%= blog_search_path %>",
         data: searchData, 
         success: function(data){
           viewModel.searchedBlogs.removeAll();
@@ -45,11 +58,13 @@
           }
         }
       });
-    }
+    };
 
-    viewModel.searchString.subscribe(function(event){
+    var actualSearch = function(event){
       searchBlogs({ searchTerms: viewModel.searchString });
-    });
+    };
+
+    viewModel.searchString.subscribe(actualSearch);
     
     searchBlogs(null);
 

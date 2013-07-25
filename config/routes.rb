@@ -1,9 +1,15 @@
 Guestt::Application.routes.draw do
   devise_for :users
 
+  # test
+  match "/test/p", :controller => "test", :action => "populatedatabase", via: [:get]
+
+  # guest
   match "/guest/", :controller => "guest", :action => "index", via: [:get]
+  match "/guest/sold", :controller => "guest", :action => "soldblogs", via: [:get]
+  match "/guest/updatestatus", :controller => "guest", :action => "updateblogstatustosold", via: [:put]
   
-  #blogs
+  # blogs
   match "/blogowner/", :controller => "blogowner", :action => "index", via: [:get]
   match "/blogowner/new", :controller => "blogowner", :action => "newblog", via: [:get]
   match "/blogowner/create", :controller => "blogowner", :action => "createblog", via: [:post]
@@ -13,7 +19,7 @@ Guestt::Application.routes.draw do
   match "/blogowner/manage", :controller => "blogowner", :action => "manageblogs", via: [:get]
   match "/blogowner/updatestatus", :controller => "blogowner", :action => "updateblogstatus", via: [:put]
   match "/blogowner/blogs", :controller => "blogowner", :action => "blogs", via: [:get]
-  match "/blog/searchblogs", :controller => "blog", :action => "searchblogs", via: [:get]
+  match "/blog/search", :controller => "blog", :action => "searchblogs", via: [:get]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -11,6 +11,10 @@ class BlogStatus < ActiveRecord::Base
 		"rejected"
 	end
 
+	def self.sold
+		"sold"
+	end
+
 	def self.acceptablestatus(status)
 		if status == BlogStatus.pending || status == BlogStatus.approved || status == BlogStatus.rejected
 			true
