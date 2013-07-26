@@ -4,21 +4,26 @@ Guestt::Application.routes.draw do
   # test
   match "/test/p", :controller => "test", :action => "populatedatabase", via: [:get]
 
+  # admin
+  match "/admin", :controller => "admin", :action => "approvedblogs", via: [:get]
+  match "/admin/approved", :controller => "admin", :action => "approvedblogs", via: [:get]
+  match "/admin/rejected", :controller => "admin", :action => "rejectedblogs", via: [:get]
+  match "/admin/pending", :controller => "admin", :action => "pendingblogs", via: [:get]
+  match "/admin/manage", :controller => "admin", :action => "manageblogs", via: [:get]
+  match "/admin/updatestatus", :controller => "admin", :action => "updateblogstatus", via: [:put]
+  match "/admin/blogs", :controller => "admin", :action => "blogs", via: [:get]
+  
   # guest
   match "/guest/", :controller => "guest", :action => "index", via: [:get]
   match "/guest/sold", :controller => "guest", :action => "soldblogs", via: [:get]
   match "/guest/updatestatus", :controller => "guest", :action => "updateblogstatustosold", via: [:put]
   
-  # blogs
+  # blogowner
   match "/blogowner/", :controller => "blogowner", :action => "index", via: [:get]
   match "/blogowner/new", :controller => "blogowner", :action => "newblog", via: [:get]
   match "/blogowner/create", :controller => "blogowner", :action => "createblog", via: [:post]
-  match "/blogowner/approved", :controller => "blogowner", :action => "approvedblogs", via: [:get]
-  match "/blogowner/rejected", :controller => "blogowner", :action => "rejectedblogs", via: [:get]
-  match "/blogowner/pending", :controller => "blogowner", :action => "pendingblogs", via: [:get]
-  match "/blogowner/manage", :controller => "blogowner", :action => "manageblogs", via: [:get]
-  match "/blogowner/updatestatus", :controller => "blogowner", :action => "updateblogstatus", via: [:put]
-  match "/blogowner/blogs", :controller => "blogowner", :action => "blogs", via: [:get]
+
+  # blog
   match "/blog/search", :controller => "blog", :action => "searchblogs", via: [:get]
 
   # The priority is based upon order of creation:

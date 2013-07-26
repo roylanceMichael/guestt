@@ -26,4 +26,12 @@ module ApplicationHelper
 			""
 		end
 	end
+
+	def adminclass
+		if(request.env['PATH_INFO'] == "/admin")
+			"active"
+		else
+			""
+		end
+	end
 end
